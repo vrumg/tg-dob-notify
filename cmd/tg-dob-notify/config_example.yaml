@@ -1,0 +1,10 @@
+telegram:
+  name: "insert botname here"
+  token: "insert token here"
+  url: "https://api.telegram.org"
+database:
+  driver: "postgres"
+  user: "username"
+  name: "database name"
+  password: "insert password here"
+  ssl: "disable or enable"
