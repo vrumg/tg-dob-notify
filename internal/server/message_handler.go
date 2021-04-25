@@ -55,6 +55,14 @@ func (s Server) ReadMsg(m *tb.Message) {
 		return
 	}
 
+	// call service to add record
+	err = s.service.SetBirthdate(m.Chat.ID, m.Sender.Username, month, day)
+	if err != nil {
+		_, _ = s.bot.Send(m.Chat,
+			"@"+m.Sender.Username+" Я не смог добавить тебя в рассылку. Попробуй еще раз. Для примера жми /start")
+		return
+	}
+
 	// get month name
 	monthName := time.Month(month)
 

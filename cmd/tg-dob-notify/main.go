@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"github.com/vrumg/tg-dob-notify/internal/birthdate_service"
 	botLib "github.com/vrumg/tg-dob-notify/internal/bot"
 	repo2 "github.com/vrumg/tg-dob-notify/internal/repo"
 	"github.com/vrumg/tg-dob-notify/internal/server"
@@ -38,10 +39,12 @@ func main() {
 
 	// init repository
 	repo := repo2.InitRepo(conn)
-	_ = repo
+
+	// init service
+	service := birthdate_service.InitService(repo)
 
 	// init server instance
-	serv, err := server.InitServer(bot)
+	serv, err := server.InitServer(bot, service)
 	if err != nil {
 		log.Fatal(err)
 		return

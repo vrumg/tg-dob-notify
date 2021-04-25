@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/vrumg/tg-dob-notify/internal/birthdate_service"
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
@@ -8,12 +9,14 @@ import (
 // works with telegram bot pointer
 // contains handlers and
 type Server struct {
-	bot *tb.Bot
+	bot     *tb.Bot
+	service *birthdate_service.Service
 }
 
-func InitServer(bot *tb.Bot) (*Server, error) {
+func InitServer(bot *tb.Bot, service *birthdate_service.Service) (*Server, error) {
 	serv := &Server{
-		bot: bot,
+		bot:     bot,
+		service: service,
 	}
 
 	return serv, nil
