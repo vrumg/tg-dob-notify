@@ -1,0 +1,7 @@
+/cmd/tg-dob-notify/config.yaml
+/cmd/dbtest
+/.idea/vcs.xml
+/.idea/tg-dob-notify.iml
+/.idea/modules.xml
+/.idea/.gitignore
+/.idea/dataSources.xml
