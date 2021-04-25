@@ -19,19 +19,19 @@ func main() {
 	// set default values
 	configPath, err := parseFlags()
 	if err != nil {
-		log.Fatal().Str("Failed to parse flags", err.Error())
+		log.Fatal().Str("failed to parse flags", err.Error())
 	}
 
 	// load configuration file
 	config, err := loadConfig(configPath)
 	if err != nil {
-		log.Fatal().Str("Failed to load configuration", err.Error())
+		log.Fatal().Str("failed to load configuration", err.Error())
 	}
 
 	// init telegram bot
 	bot, err := botLib.InitTelegramBot(config.Telegram.URL, config.Telegram.Token)
 	if err != nil {
-		log.Fatal().Str("Failed to init bot", err.Error())
+		log.Fatal().Str("failed to init bot", err.Error())
 	}
 
 	// init db connection
@@ -43,7 +43,7 @@ func main() {
 		config.Database.SSL,
 	)
 	if err != nil {
-		log.Fatal().Str("Failed to init db connection", err.Error())
+		log.Fatal().Str("failed to init db connection", err.Error())
 	}
 
 	// init repository
@@ -53,15 +53,12 @@ func main() {
 	service := birthdate_service.InitService(repository)
 
 	// init server instance
-	serv, err := server.InitServer(bot, service)
+	server, err := server.InitServer(bot, service)
 	if err != nil {
-		log.Fatal().Str("Failed to init server", err.Error())
+		log.Fatal().Str("failed to init server", err.Error())
 	}
-
-	// register server handlers
-	serv.RegisterHandlers()
 
 	// start application and bot
 	log.Info().Msg("Starting the application")
-	bot.Start()
+	server.Serve()
 }

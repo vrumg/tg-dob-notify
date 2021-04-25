@@ -5,9 +5,8 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// initDatabaseConnection initialize database connection pool
 func initDatabaseConnection(driver string, user string, password string, dbName string, sslMode string) (*sqlx.DB, error) {
-	// this Pings the database trying to connect
-	// use sqlx.Open() for sql.Open() semantics
 	connOptions := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=%s",
 		user,
 		password,

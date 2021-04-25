@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// Config main configuration struct. Populated from yaml file
 type Config struct {
 	Telegram struct {
 		Name  string `yaml:"name"`
